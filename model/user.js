@@ -40,7 +40,7 @@ const userSchema = new Schema(
 userSchema.pre("save", function (next) {
   const user = this;
 
-  if (!this.isModified("password"))
+  if (!this.isModified("password"))                          // it only works when you have password changing option
     // If the password field is not modified, skip hashing
     return next();
 

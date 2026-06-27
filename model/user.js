@@ -1,5 +1,7 @@
 const { createHmac, randomBytes } = require("node:crypto");
 const { Schema, model } = require("mongoose");
+const { createTokenForUser } = require("../services/authentication");
+
 
 const userSchema = new Schema(
   {
@@ -51,10 +53,10 @@ userSchema.pre("save", function (next) {
 
   this.salt = salt;
   this.password = hashPassword; // Store the hashed password
-  // next();
+  next();
 });
 
-userSchema.static("matchPassword", async function (email, password) {
+userSchema.static("matchPasswordAndGenrateToken", async function (email, password) {
   const user = await this.findOne({ email });
   if (!user) throw new Error("User not found"); // We get the user from the database using the provided email. If the user doesn't exist, return false.
 
@@ -67,8 +69,9 @@ userSchema.static("matchPassword", async function (email, password) {
 
   if (userProvidedPasswordHash !== hashPassword)
     throw new Error("Invalid password"); // If the hashed password doesn't match the stored hash, return false.
-
-  return user; // If the password matches, return the user object.
+   
+   const token = createTokenForUser(user); // Generate a JWT token for the authenticated user
+   return token;
 });
 
 const User = model("User", userSchema);

@@ -2,10 +2,13 @@
 <html lang="en">
   <head>
     <%- include('./partials/head') %>
+    
     <title>Sign In</title>
   </head>
   <body>
+      <%- include('./partials/navbar') %>
     <h1>Sign In</h1>
+
 
     <form method="post" action="/user/signin">
       <div class="mb-3">
@@ -30,13 +33,10 @@
           name="password"
         />
       </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+     
+      <button type="submit" class="btn btn-primary">SignIn</button>
     </form>
 
-    <% - include('./partials/scripts') %>
+    <%- include('./partials/scripts') %>
   </body>
 </html>

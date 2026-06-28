@@ -39,12 +39,11 @@ const userSchema = new Schema(
   { timestamps: true },
 );
 
-userSchema.pre("save", function (next) {
+userSchema.pre("save", async function () {
   const user = this;
 
   if (!this.isModified("password"))                          // it only works when you have password changing option
-    // If the password field is not modified, skip hashing
-    return next();
+    return; // If the password field is not modified, skip hashing
 
   const salt = randomBytes(16).toString(); // Generate a random salt
   const hashPassword = createHmac("sha256", salt)
@@ -53,7 +52,6 @@ userSchema.pre("save", function (next) {
 
   this.salt = salt;
   this.password = hashPassword; // Store the hashed password
-  next();
 });
 
 userSchema.static("matchPasswordAndGenrateToken", async function (email, password) {

@@ -36,7 +36,4 @@ router.post('/', upload.single('coverImage'), async (req, res) => {
 })
 
 
-
-
-
 module.exports = router;

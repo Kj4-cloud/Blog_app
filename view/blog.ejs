@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+
+    <title>Blog</title>
+  </head>
+  <body>
+   <%- include('./partials/navbar') %>
+ 
+   <div class="container mt-5">
+     <h2 class="card-title"><%= blog.title %></h2>
+    <div class="card mb-3">
+      <img src="<%= blog.coverImageURL %>" class="card-img-top "  width="700px" alt="<%= blog.title %>">
+      <div class="card-body">
+       
+        <pre class="card-text"><%= blog.body %></pre>
+      </div>
+    </div>
+  </div>
+
+  <%- include('./partials/scripts') %>
+  </body>
+</html>

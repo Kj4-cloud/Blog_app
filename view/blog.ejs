@@ -17,6 +17,11 @@
         <pre class="card-text"><%= blog.body %></pre>
       </div>
     </div>
+
+     <div class="container mt-5">
+      <img src="<%= blog.createdBy.profileImageURL %>" class="rounded-circle" width="50px" alt="...">
+      <%= blog.createdBy.fullName %>
+     </div>
   </div>
 
   <%- include('./partials/scripts') %>
